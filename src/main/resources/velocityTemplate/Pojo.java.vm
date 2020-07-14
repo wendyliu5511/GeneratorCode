@@ -1,0 +1,23 @@
+package ${package}.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
+
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+
+@Data
+public class ${className}Pojo implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+#foreach ($column in $columns)
+    #if($!column.attrname !="creator"&&$!column.attrname !="regenerator"&&$!column.attrname !="createDate"&&$!column.attrname !="updateDate"&&$!column.attrname !="delFlag"&&$!column.attrname !="extra")  
+	
+	private $column.attrType $column.attrname;   //$column.comments
+	#end
+#end
+
+
+}

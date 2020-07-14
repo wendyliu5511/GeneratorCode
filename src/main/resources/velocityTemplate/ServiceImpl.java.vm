@@ -1,0 +1,63 @@
+package ${package}.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+
+import java.util.Map;
+
+import ${package}.persistence.${className}Mapper;
+import ${package}.domain.${className}Pojo;
+import ${package}.service.${className}Service;
+
+
+
+@Service
+@Transactional(readOnly = true)
+public class ${className}ServiceImpl implements ${className}Service {
+	@Autowired
+	private ${className}Mapper ${classname}mapper;
+	
+	@Override
+	public ${className}Pojo queryObject(${pk.attrType} ${pk.attrname}){
+		return ${classname}mapper.queryObject(${pk.attrname});
+	}
+	
+	@Override
+    public PageInfo queryList(Map<String, Object> map, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(null != pageNum ? pageNum : 0, null != pageSize ? pageSize : 0);
+        return new PageInfo(${classname}mapper.queryList(map));
+    }
+	@Override
+	public int queryTotal(Map<String, Object> map){
+		return ${classname}mapper.queryTotal(map);
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void save(${className}Pojo ${classname}){
+		${classname}mapper.save(${classname});
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void update(${className}Pojo ${classname}){
+		${classname}mapper.update(${classname});
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void delete(${pk.attrType} ${pk.attrname}){
+		${classname}mapper.delete(${pk.attrname});
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void deleteBatch(${pk.attrType}[] ${pk.attrname}s){
+		${classname}mapper.deleteBatch(${pk.attrname}s);
+	}
+	
+}

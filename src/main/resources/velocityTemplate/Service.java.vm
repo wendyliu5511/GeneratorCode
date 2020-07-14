@@ -1,0 +1,25 @@
+package ${package}.service;
+
+import ${package}.domain.${className}Pojo;
+
+import java.util.List;
+import java.util.Map;
+import com.github.pagehelper.PageInfo;
+
+public interface ${className}Service {
+	
+	${className}Pojo queryObject(${pk.attrType} ${pk.attrname});
+	
+
+    PageInfo queryList(Map<String, Object> map, Integer pageNum, Integer pageSize);
+	
+	int queryTotal(Map<String, Object> map);
+	
+	void save(${className}Pojo ${classname});
+	
+	void update(${className}Pojo ${classname});
+	
+	void delete(${pk.attrType} ${pk.attrname});
+	
+	void deleteBatch(${pk.attrType}[] ${pk.attrname}s);
+}

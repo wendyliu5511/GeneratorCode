@@ -1,0 +1,16 @@
+package ${package}.persistence;
+
+import ${package}.domain.${className}Pojo;
+import java.util.List;
+import java.util.Map;
+
+public interface ${className}Mapper{
+    List queryList(Map<String,Object> map);
+    void save(${className}Pojo ${classname});
+    void update(${className}Pojo ${classname});
+    void delete(Integer ${pk.attrname});
+    void deleteBatch(Integer[] ${pk.attrname}s);
+    int queryTotal(Map<String,Object> map);
+     ${className}Pojo queryObject(Integer ${pk.attrname});
+	
+}

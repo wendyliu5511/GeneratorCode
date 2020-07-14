@@ -1,0 +1,41 @@
+﻿# Server port
+server:
+  port: 60048
+
+# MySQL config
+spring:
+  #profiles:
+       # active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.31.15:3306/db_workpaper?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true
+    username: root
+    password: Gssx@208
+    maxActive: 80     #最大活动连接
+    initialSize: 10   #初始化连接
+    maxIdle: 60       #最大空闲连接
+    minIdle: 10       #最小空闲连接
+    maxWait: 3000     #从池中取连接的最大等待时间，单位ms
+    validationQuery: SELECT 1  #验证使用的SQL语句
+    testWhileIdle: true      #指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除.
+    testOnBorrow: false      #拿出连接时不要测试，否则很影响性能
+    timeBetweenEvictionRunsMillis: 30000  #每30秒运行一次空闲连接回收器
+    minEvictableIdleTimeMillis: 1800000   #池中的连接空闲30分钟后被回收
+    numTestsPerEvictionRun: 3 #在每次空闲连接回收器线程(如果有)运行时检查的连接数量
+
+  mvc:
+    static-path-pattern: /**
+    favicon:
+      enabled: false
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${myProps.uploadPath}
+
+
+# Mybatis配置
+mybatis:
+    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+    mapperLocations: classpath:mapping/**/*.xml
+    # 加载全局的配置文件
+    configLocation: classpath:mybatis-config.xml
+#生成代码包名
+package: com.gssx.digaos

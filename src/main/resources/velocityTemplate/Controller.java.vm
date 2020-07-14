@@ -1,0 +1,81 @@
+package ${package}.controller;
+
+
+import java.util.Map;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import com.github.pagehelper.PageInfo;
+import ${package}.domain.${className}Pojo;
+import ${package}.service.${className}Service;
+import ${package}.common.util.RestInfo;
+import ${package}.common.util.RestUtil;
+
+
+@RestController
+@RequestMapping("/${className}")
+public class ${className}Controller{
+	@Autowired
+	private ${className}Service ${classname}Service;
+	
+	
+	
+	/**
+	 * 分页查询列表
+	 *  params{page:当前页码,limit:每页条数}
+	 */
+	@RequestMapping("/list")
+	public RestInfo list(@RequestParam Map<String, Object> params, @RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize){
+        PageInfo list =${classname}Service.queryList(params, pageNum, pageSize);
+		return RestUtil.setData(list);
+	}
+	
+	
+	/**
+	 * 信息
+	 */
+	@RequestMapping("/info")
+	public RestInfo info(@RequestParam(required = false)  ${pk.attrType} ${pk.attrname}){
+		${className}Pojo ${classname} = ${classname}Service.queryObject(${pk.attrname});
+        return RestUtil.setData( ${classname});
+	}
+	
+	
+	
+	/**
+	 * 保存
+	 */
+	@RequestMapping("/save")
+	public RestInfo save(@RequestBody ${className}Pojo ${classname}){
+		${classname}Service.save(${classname});
+		return RestUtil.setSuccessMsg("save success!");
+	}
+	
+	
+	
+	/**
+	 * 修改
+	 */
+	@RequestMapping("/update")
+	public RestInfo update(@RequestBody ${className}Pojo ${classname}){
+		${classname}Service.update(${classname});
+		
+		return RestUtil.setSuccessMsg("update success!");
+	}
+	
+	/**
+	 * 删除
+	 */
+	@RequestMapping("/delete")
+	public RestInfo delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s){
+		${classname}Service.deleteBatch(${pk.attrname}s);
+		
+		return RestUtil.setSuccessMsg("delete success!");
+	}
+	
+}
